@@ -139,19 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Engine.cpp" />
     <ClCompile Include="ExampleGame.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="PaintDevice.cpp" />
-    <ClCompile Include="Size.cpp" />
     <ClCompile Include="TrueField.cpp" />
     <ClCompile Include="UserField.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Engine.h" />
     <ClInclude Include="ExampleGame.h" />
-    <ClInclude Include="PaintDevice.h" />
-    <ClInclude Include="Size.h" />
     <ClInclude Include="TrueField.h" />
     <ClInclude Include="UserField.h" />
   </ItemGroup>

@@ -1,5 +1,2 @@
-﻿  TrueField.cpp
-D:\itea\Project1\Project1\TrueField.cpp(27,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-  main.cpp
-  Создание кода...
+﻿  main.cpp
   Project1.vcxproj -> D:\itea\Project1\Debug\Project1.exe

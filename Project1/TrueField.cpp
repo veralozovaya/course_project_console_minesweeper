@@ -10,9 +10,9 @@ void TrueField::GenField()
 {
 	GenMines();
 
-	for (int i = 0; i < rows; i++)
+	for (int i = 0; i < trows; i++)
 	{
-		for (int j = 0; j < cols; j++)
+		for (int j = 0; j < tcols; j++)
 		{
 			if (tField[i][j] != '*')
 			{
@@ -27,9 +27,9 @@ void TrueField::GenMines()
 	srand(time(NULL));
 	vector <pair<int, int>> MineCoords;
 
-	for (int i = 0; i < rows; i++)
+	for (int i = 0; i < trows; i++)
 	{
-		for (int j = 0; j < cols; j++)
+		for (int j = 0; j < tcols; j++)
 		{
 			MineCoords.push_back(make_pair(i, j));
 		}
@@ -37,7 +37,7 @@ void TrueField::GenMines()
 
 	random_shuffle(MineCoords.begin(), MineCoords.end());
 
-	for (int i = 0; i < mines; i++)
+	for (int i = 0; i < tmines; i++)
 	{
 		tField[MineCoords[i].first][MineCoords[i].second] = '*';
 	}
@@ -64,7 +64,7 @@ int TrueField::GenNeighbours(int rows, int cols)
 
 bool TrueField::CheckIfInside(int row, int col)
 {
-	if (0 <= row && row < rows && 0 <= col && col < cols)
+	if (0 <= row && row < trows && 0 <= col && col < tcols)
 	{
 		return 1;
 	}
@@ -77,12 +77,12 @@ bool TrueField::CheckIfInside(int row, int col)
 void TrueField::PrintField()
 {
 	GenField();
-	for (int i = 0; i < rows; i++)
+	for (int i = 0; i < trows; i++)
 	{
-		for (int j = 0; j < cols; j++)
+		for (int j = 0; j < tcols; j++)
 		{
 			cout << tField[i][j] <<"  ";
-			if (j == cols-1)
+			if (j == tcols-1)
 			{
 				cout << "\n";
 			}

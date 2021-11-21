@@ -2,12 +2,12 @@
 #include <vector>
 #include <ctime>
 #include <algorithm>
-#include "TrueField.h"
+#include "ExampleGame.h"
 
 using namespace std;
 
 int main()
 {
-	TrueField field;
-	field.PrintField();
+	ExampleGame maingame;
+	return 0;
 }

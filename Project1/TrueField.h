@@ -10,7 +10,7 @@ using namespace std;
 class TrueField 
 {
 public:
-	int rows = 9, cols = 9, mines=10;
+	int trows = 9, tcols = 9, tmines=10;
 	char tField[9][9];
 
 	void GenField();

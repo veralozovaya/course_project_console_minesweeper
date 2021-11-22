@@ -1,6 +1,9 @@
-﻿  ExampleGame.cpp
-D:\itea\Project1\Project1\ExampleGame.cpp(43,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-D:\itea\Project1\Project1\ExampleGame.cpp(107,22): warning C4018: <: несоответствие типов со знаком и без знака
-D:\itea\Project1\Project1\ExampleGame.cpp(124,22): warning C4018: <: несоответствие типов со знаком и без знака
-D:\itea\Project1\Project1\ExampleGame.cpp(188,20): warning C4018: <: несоответствие типов со знаком и без знака
+﻿  ExampleGame_amateur.cpp
+D:\itea\Project1\Project1\ExampleGame_amateur.cpp(32,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+D:\itea\Project1\Project1\ExampleGame_amateur.cpp(88,19): warning C4309: =: усечение константного значения
+D:\itea\Project1\Project1\ExampleGame_amateur.cpp(98,22): warning C4018: <: несоответствие типов со знаком и без знака
+D:\itea\Project1\Project1\ExampleGame_amateur.cpp(102,21): warning C4309: =: усечение константного значения
+D:\itea\Project1\Project1\ExampleGame_amateur.cpp(110,30): warning C4309: =: усечение константного значения
+D:\itea\Project1\Project1\ExampleGame_amateur.cpp(116,22): warning C4018: <: несоответствие типов со знаком и без знака
+D:\itea\Project1\Project1\ExampleGame_amateur.cpp(182,20): warning C4018: <: несоответствие типов со знаком и без знака
   Project1.vcxproj -> D:\itea\Project1\Debug\Project1.exe

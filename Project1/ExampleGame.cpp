@@ -4,6 +4,7 @@
 #include <vector>
 #include <ctime>
 #include <algorithm>
+#include <chrono>
 
 using namespace std;
 
@@ -20,6 +21,19 @@ void Fields::GenField()
 			{
 				tField[i][j] = GenNeighbours(i, j) + '0';
 			}
+		}
+	}
+
+	for (int i = 0; i < trows; i++)
+	{
+		for (int j = 0; j < tcols; j++)
+		{
+			cout << tField[i][j] << "  ";
+			if (j == ucols - 1)
+			{
+				cout << "\n";
+			}
+
 		}
 	}
 }
@@ -75,53 +89,111 @@ bool Fields::CheckIfInside(int row, int col)
 	}
 }
 
-
-void Fields::uGenField()
+void Fields::FieldPrint()
 {
-	GenField();
 	for (int i = 0; i < urows; i++)
 	{
 		for (int j = 0; j < ucols; j++)
 		{
-			uField[i][j] = '+';
+			
+				uField[i][j] = '+';
+
 		}
 	}
-	uPrintField(UserPos);
-}
+	for (int i = 0; i < urows; i++)
+	{
+		for (int j = 0; j < ucols; j++)
+		{
+			for (int k = 0; k < FlagCoords.size(); k++)
+			{
+				if (i == FlagCoords[k].first && j == FlagCoords[k].second)
+				{
+					uField[i][j] = 'f';
+				}
+			}
 
-void Fields::uPrintField(int userpos[2])
-{
-	uField[userpos[0]][userpos[1]] = '$';
+		}
+		uField[user_row][user_col] = '$';
+
+	}
+
+	/*for (int i = 0; i < urows; i++)
+	{
+		for (int j = 0; j < ucols; j++)
+		{
+			for (int k = 0; k < FlagCoords.size(); k++)
+			{
+				if (i == BoxCoords[k].first && j == BoxCoords[k].second)
+				{
+					uField[i][j] = tField[i][j];
+				}
+			}
+
+		}
+	}*/
+
 	for (int i = 0; i < urows; i++)
 	{
 		for (int j = 0; j < ucols; j++)
 		{
 			cout << uField[i][j] << "  ";
-			if (j == ucols-1)
+			if (j == ucols - 1)
 			{
 				cout << "\n";
 			}
-			
+
 		}
 	}
 }
 
-void Fields::OpenBox(int row, int col)
+void Fields::OpenBox()
 {
-	if (tField[row][col] != '*')
+	if (count == 0)
 	{
-		uField[row][col] = tField[row][col];
+		GenField();
+		if (tField[user_row][user_col] != '*')
+		{
+			BoxCoords.push_back(make_pair(user_row, user_col));
+			FieldPrint();
+		}
+		else
+		{
+			cout << "///////";
+		}
+		count++;
 	}
 	else
 	{
-		EndGame();
+		if (tField[user_row][user_col] != '*')
+		{
+			BoxCoords.push_back(make_pair(user_row, user_col));
+			FieldPrint();
+		}
+		else
+		{
+			cout << "///////";
+		}
 	}
 	
 }
 
-void Fields::FlagBox(int row, int col)
+void Fields::FlagBox()
 {
-	uField[row][col] = 'f';
+	FlagCoords.push_back(make_pair(user_row, user_col));
+	
+}
+
+void Fields::UnFlagBox()
+{
+	for (int k = 0; k < FlagCoords.size(); k++)
+	{
+		if (user_row == FlagCoords[k].first && user_col == FlagCoords[k].second)
+		{
+			FlagCoords.erase(FlagCoords.begin() + k);
+		}
+
+	}
+	//FlagCoords.pop_back();
 }
 
 bool Fields::EndGame()
@@ -131,17 +203,25 @@ bool Fields::EndGame()
 
 ExampleGame::ExampleGame() {
 	Fields game;
-
-	game.uGenField();
-
+	//game.GenField();
+	game.FieldPrint();
+	
 	track_key(VK_SPACE); //открыть
 	track_key(VK_LEFT);
 	track_key(VK_RIGHT);
 	track_key(VK_UP);
 	track_key(VK_DOWN);
 	track_key(0x46); //флаг
+	track_key(0x44); //снять флаг
+	GameLoop();
+}
 
-
+void ExampleGame::GameLoop()
+{
+	while (!EndGame())
+	{
+		uppdateInput();
+	}
 }
 
 void ExampleGame::on_button_press(const int button) {
@@ -151,22 +231,25 @@ void ExampleGame::on_button_press(const int button) {
 	case VK_LEFT:
 	{
 		system("cls");
-		user_col++;
-		uPrintField(UserPos);
+		user_col--;
+		FieldPrint();
+		break;
 	}
 
 	case VK_RIGHT:
 	{
 		system("cls");
-		user_col--;
-		uPrintField(UserPos);
+		user_col++;
+		FieldPrint();
+		break;
 
 	}
 	case VK_UP:
 	{
 		system("cls");
-		user_col--;
-		uPrintField(UserPos);
+		user_row--;
+		FieldPrint();
+		break;
 
 	}
 
@@ -174,27 +257,55 @@ void ExampleGame::on_button_press(const int button) {
 	{
 		system("cls");
 		user_row++;
-		uPrintField(UserPos);
+		FieldPrint();
+		break;
 
 	}
 	case VK_SPACE:
 	{
 		system("cls");
-		OpenBox(user_row, user_col);
-		uPrintField(UserPos);
-
+		OpenBox();
+		break;
 	}
 
 	case 0x46:
 	{
 		system("cls");
-		FlagBox(user_row, user_col);
-		uPrintField(UserPos);
+		FlagBox();
+		//FlagBox();
+		FieldPrint();
+		break;
+	}
+
+	case 0x44:
+	{
+		system("cls");
+		UnFlagBox();
+		//UnFlagBox();
+		FieldPrint();
+		break;
 	}
 	default:
 		break;
 	}
 }
+
+void ExampleGame::uppdateInput() {
+	for (const int& key : m_TrackedKeys) {
+		const SHORT keyState = GetKeyState(key);
+		const bool isDown = keyState & 0x8000;
+
+		const std::set<int>::const_iterator keyItr = m_PressedKeys.find(key);
+		if (isDown && keyItr == m_PressedKeys.end()) {
+			m_PressedKeys.insert(key);
+			on_button_press(key);
+		}
+		else if (!isDown && keyItr != m_PressedKeys.end()) {
+			m_PressedKeys.erase(keyItr);
+		}
+	}
+}
+
 void ExampleGame::track_key(const int key) {
 	m_TrackedKeys.insert(key);
 }

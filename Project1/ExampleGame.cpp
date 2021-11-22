@@ -24,18 +24,6 @@ void Fields::GenField()
 		}
 	}
 
-	for (int i = 0; i < trows; i++)
-	{
-		for (int j = 0; j < tcols; j++)
-		{
-			cout << tField[i][j] << "  ";
-			if (j == ucols - 1)
-			{
-				cout << "\n";
-			}
-
-		}
-	}
 }
 
 void Fields::GenMines()
@@ -117,11 +105,12 @@ void Fields::FieldPrint()
 
 	}
 
-	/*for (int i = 0; i < urows; i++)
+	
+	for (int i = 0; i < urows; i++)
 	{
 		for (int j = 0; j < ucols; j++)
 		{
-			for (int k = 0; k < FlagCoords.size(); k++)
+			for (int k = 0; k < BoxCoords.size(); k++)
 			{
 				if (i == BoxCoords[k].first && j == BoxCoords[k].second)
 				{
@@ -130,7 +119,7 @@ void Fields::FieldPrint()
 			}
 
 		}
-	}*/
+	}
 
 	for (int i = 0; i < urows; i++)
 	{
@@ -158,7 +147,7 @@ void Fields::OpenBox()
 		}
 		else
 		{
-			cout << "///////";
+			EndGame();
 		}
 		count++;
 	}
@@ -171,7 +160,7 @@ void Fields::OpenBox()
 		}
 		else
 		{
-			cout << "///////";
+			EndGame();
 		}
 	}
 	
@@ -193,7 +182,6 @@ void Fields::UnFlagBox()
 		}
 
 	}
-	//FlagCoords.pop_back();
 }
 
 bool Fields::EndGame()
@@ -203,7 +191,6 @@ bool Fields::EndGame()
 
 ExampleGame::ExampleGame() {
 	Fields game;
-	//game.GenField();
 	game.FieldPrint();
 	
 	track_key(VK_SPACE); //открыть
@@ -272,7 +259,6 @@ void ExampleGame::on_button_press(const int button) {
 	{
 		system("cls");
 		FlagBox();
-		//FlagBox();
 		FieldPrint();
 		break;
 	}
@@ -281,7 +267,6 @@ void ExampleGame::on_button_press(const int button) {
 	{
 		system("cls");
 		UnFlagBox();
-		//UnFlagBox();
 		FieldPrint();
 		break;
 	}

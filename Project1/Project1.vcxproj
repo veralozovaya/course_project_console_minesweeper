@@ -139,15 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ExampleGame.cpp" />
+    <ClCompile Include="ExampleGame_amateur.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="TrueField.cpp" />
-    <ClCompile Include="UserField.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ExampleGame.h" />
-    <ClInclude Include="TrueField.h" />
-    <ClInclude Include="UserField.h" />
+    <ClInclude Include="ExampleGame_amateur.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
